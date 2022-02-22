@@ -1,5 +1,7 @@
 package web.domain;
 
+import com.alibaba.fastjson.JSON;
+
 public class User {
     private String username;
     private Integer age;
@@ -8,6 +10,8 @@ public class User {
         this.username = username;
         this.age = age;
     }
+
+    public User() {}
 
     public String getUsername() {
         return username;
@@ -25,4 +29,8 @@ public class User {
         this.age = age;
     }
 
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
+    }
 }
