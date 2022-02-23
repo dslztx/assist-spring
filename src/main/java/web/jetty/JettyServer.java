@@ -1,5 +1,9 @@
 package web.jetty;
 
+import java.util.EnumSet;
+
+import javax.servlet.DispatcherType;
+
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -9,6 +13,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 
 import web.configuration.AppConfiguration;
+import web.filter.CustomFilter;
 
 public class JettyServer {
     private static final int DEFAULT_PORT = 8080;
@@ -27,6 +32,10 @@ public class JettyServer {
         handler.setContextPath(CONTEXT_PATH);
         handler.addServlet(new ServletHolder(new DispatcherServlet(context)), MAPPING_URL);
         handler.addEventListener(new ContextLoaderListener(context));
+
+        // 增加一个Filter，正式上线时需要去掉
+        handler.addFilter(CustomFilter.class, "/*", EnumSet.of(DispatcherType.REQUEST));
+
         return handler;
     }
 
