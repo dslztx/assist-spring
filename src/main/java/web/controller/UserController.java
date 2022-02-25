@@ -1,5 +1,7 @@
 package web.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,8 @@ import web.domain.User;
 
 @Controller
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @RequestMapping("/hello")
     @ResponseBody
@@ -30,5 +34,25 @@ public class UserController {
     @ResponseBody
     public User helloWay() {
         return new User("dslztx", 33);
+    }
+
+    @RequestMapping("/sockettest")
+    @ResponseBody
+    public String socketTest(@RequestBody String body) throws InterruptedException {
+
+        logger.info("sockettest: {}", body);
+
+        return "Socket Test successfully";
+    }
+
+    @RequestMapping("/timeouttest")
+    @ResponseBody
+    public String timeoutTest(@RequestBody String body) throws InterruptedException {
+
+        logger.info("sockettest: {}", body);
+
+        Thread.sleep(10000L);
+
+        return "Socket Test successfully";
     }
 }

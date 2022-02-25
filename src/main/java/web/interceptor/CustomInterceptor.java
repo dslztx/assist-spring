@@ -13,12 +13,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
-
-import com.alibaba.fastjson.JSON;
 
 import me.dslztx.assist.util.ArrayAssist;
 import me.dslztx.assist.util.CollectionAssist;
+import me.dslztx.assist.util.ObjectAssist;
 
 @Component
 public class CustomInterceptor extends HandlerInterceptorAdapter {
@@ -26,9 +26,15 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
     private static final Logger logger = LoggerFactory.getLogger(CustomInterceptor.class);
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+    public boolean preHandle(HttpServletRequest request1, HttpServletResponse response, Object handler) {
+
+        ContentCachingRequestWrapper request = new ContentCachingRequestWrapper(request1);
 
         Request request0 = new Request();
+
+        request0.setMethod(request.getMethod());
+        request0.setUri(request.getRequestURI());
+        request0.setProtocol(request.getProtocol());
 
         Enumeration<String> headerNames = request.getHeaderNames();
 
@@ -42,7 +48,12 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
 
         request0.setHeaders(headers);
 
-        logger.info("intercepted result request {}", JSON.toJSONString(request0));
+        byte[] dd = request.getContentAsByteArray();
+        if (ArrayAssist.isNotEmpty(dd)) {
+            request0.setRequestBody(new String(dd));
+        }
+
+        logger.info("intercepted result request {}", request0.toString());
 
         return true;
     }
@@ -68,18 +79,27 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
 
         byte[] dd = wrappedResponse.getContentAsByteArray();
         if (ArrayAssist.isNotEmpty(dd)) {
-            response0.setData(new String(dd));
+            response0.setResponseBody(new String(dd));
         }
         wrappedResponse.copyBodyToResponse();
 
-        logger.info("intercepted result response {}", JSON.toJSONString(response0));
+        logger.info("intercepted result response {}", response0.toString());
     }
 }
 
 class Request {
-    List<Header> headers;
+    private String method;
 
-    byte[] data;
+    private String uri;
+
+    private String protocol;
+
+    private List<Header> headers;
+
+    /**
+     * 以字符串形式表示返回内容
+     */
+    private String requestBody;
 
     public List<Header> getHeaders() {
         return headers;
@@ -89,25 +109,75 @@ class Request {
         this.headers = headers;
     }
 
-    public byte[] getData() {
-        return data;
+    public String getRequestBody() {
+        return requestBody;
     }
 
-    public void setData(byte[] data) {
-        this.data = data;
+    public void setRequestBody(String requestBody) {
+        this.requestBody = requestBody;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+
+        sb.append(method).append(" ").append(uri).append(" ").append(protocol).append("\n");
+
+        if (CollectionAssist.isNotEmpty(headers)) {
+            for (Header header : headers) {
+                sb.append(header.getName()).append(": ").append(header.getValue()).append("\n");
+            }
+        }
+
+        sb.append("\n");
+
+        if (ObjectAssist.isNotNull(requestBody)) {
+            sb.append(requestBody);
+        }
+
+        return sb.toString();
     }
 }
 
 class Response {
 
-    int statusCode;
+    private String protocol;
 
-    List<Header> headers;
+    private int statusCode;
+
+    private String statusText;
+
+    private List<Header> headers;
 
     /**
      * 以字符串形式表示返回内容
      */
-    String data;
+    private String responseBody;
 
     public int getStatusCode() {
         return statusCode;
@@ -125,12 +195,50 @@ class Response {
         this.headers = headers;
     }
 
-    public String getData() {
-        return data;
+    public String getResponseBody() {
+        return responseBody;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setResponseBody(String responseBody) {
+        this.responseBody = responseBody;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    public String getStatusText() {
+        return statusText;
+    }
+
+    public void setStatusText(String statusText) {
+        this.statusText = statusText;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+
+        sb.append(protocol).append(" ").append(statusCode).append(" ").append(statusText).append("\n");
+
+        if (CollectionAssist.isNotEmpty(headers)) {
+            for (Header header : headers) {
+                sb.append(header.getName()).append(": ").append(header.getValue()).append("\n");
+            }
+        }
+
+        sb.append("\n");
+
+        if (ObjectAssist.isNotNull(responseBody)) {
+            sb.append(responseBody);
+        }
+
+        return sb.toString();
     }
 }
 

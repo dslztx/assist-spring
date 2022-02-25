@@ -24,14 +24,14 @@ public class MvcConfiguration implements WebMvcConfigurer {
 
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
-        converter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON_UTF8));
+        converter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON, MediaType.APPLICATION_JSON_UTF8,
+            MediaType.APPLICATION_OCTET_STREAM));
 
         converters.add(converter);
     }
 
     /**
      * 正式上线时需要去掉
-     * 
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
