@@ -43,7 +43,7 @@ public class HttpRequestTest {
     private static final Logger logger = LoggerFactory.getLogger(HttpRequestTest.class);
 
     @Test
-    public void getTest0() throws Exception {
+    public void getTest0() {
 
         CloseableHttpResponse response = null;
         CloseableHttpClient httpClient = null;
@@ -92,7 +92,7 @@ public class HttpRequestTest {
     }
 
     @Test
-    public void postTest0() throws Exception {
+    public void postTest0() {
 
         CloseableHttpResponse response = null;
         CloseableHttpClient httpClient = null;
