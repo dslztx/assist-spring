@@ -153,7 +153,7 @@ public class HttpRequestTest {
         try {
             httpClient = HttpClients.createDefault();
 
-            HttpPost post = new HttpPost("http://127.0.0.1:8080/sockettest");
+            HttpPost post = new HttpPost("http://127.0.0.1:8080/upload/datastream");
 
             User user = new User("post user", 10);
 
@@ -210,7 +210,7 @@ public class HttpRequestTest {
 
             httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
 
-            HttpPost post = new HttpPost("http://127.0.0.1:8080/timeouttest");
+            HttpPost post = new HttpPost("http://127.0.0.1:8080/timeout");
 
             User user = new User("post user", 10);
 
@@ -310,7 +310,7 @@ public class HttpRequestTest {
             byte[] dd = FileUtils.readFileToByteArray(ClassPathResourceAssist.locateFileNotInJar("1.eml"));
 
             StringBuilder httpHeader = new StringBuilder();
-            httpHeader.append("POST /sockettest HTTP/1.1\r\n");
+            httpHeader.append("POST /upload/datastream HTTP/1.1\r\n");
             httpHeader.append("Accept-Language: en-us\r\n");
             httpHeader.append("Accept: */*\r\n");
             httpHeader.append("HOST: 127.0.0.1:8080\r\n");

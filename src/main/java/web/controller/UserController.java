@@ -36,23 +36,23 @@ public class UserController {
         return new User("dslztx", 33);
     }
 
-    @RequestMapping("/sockettest")
+    @RequestMapping("/upload/datastream")
     @ResponseBody
-    public String socketTest(@RequestBody String body) throws InterruptedException {
+    public String dataStream(@RequestBody String body) {
 
-        logger.info("sockettest: {}", body);
+        logger.info("transfered data stream: {}", body);
 
-        return "Socket Test successfully";
+        return "transfer data stream successfully";
     }
 
-    @RequestMapping("/timeouttest")
+    @RequestMapping("/timeout")
     @ResponseBody
-    public String timeoutTest(@RequestBody String body) throws InterruptedException {
+    public String timeout(@RequestBody String body) throws InterruptedException {
 
-        logger.info("sockettest: {}", body);
+        logger.info("timeout: {}", body);
 
         Thread.sleep(10000L);
 
-        return "Socket Test successfully";
+        return "timeout";
     }
 }
