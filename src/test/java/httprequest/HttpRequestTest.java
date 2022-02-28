@@ -244,7 +244,6 @@ public class HttpRequestTest {
             }
 
             Assert.fail();
-
         } catch (SocketTimeoutException expected) {
         } catch (Exception e) {
             logger.error("", e);
@@ -259,8 +258,9 @@ public class HttpRequestTest {
     /**
      * 如果是HTTP 1.1，默认开启HTTP长连接；如果是HTTP 1.0，默认开启HTTP短连接
      *
-     * HTTP长连接需要HTTP协议参与： - 故使用HTTP长连接，如果使用HttpClient客户端没有任何问题 - 如果直接使用Socket，会出现响应头立即收到，响应正文很久才收到，所以：1）使用HTTP
-     * 1.0不使用长连接；2）加上"Connection: close"头不使用长连接
+     * HTTP长连接需要HTTP协议参与，在使用HTTP长连接的情形中： <br/>
+     * - 如果使用HttpClient客户端没有任何问题 <br/>
+     * - 如果直接使用Socket，会出现响应头立即收到，响应正文很久才收到现象，所以：1）使用HTTP 1 .0不使用长连接；2）加上"Connection: close"头不使用长连接
      */
     @Test
     public void getUseSocketStraightlyTest1() {
