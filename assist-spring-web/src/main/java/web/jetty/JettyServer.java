@@ -32,6 +32,9 @@ public class JettyServer {
 
         logger.info("the jetty server has started listening on port {}", port);
 
+        // 这个join()操作不是为了让Jetty Server彻底起来，网上很多人理解错了，而是：Jetty Server起来后，挂起当前线程，直到Jetty Server彻底关闭后，所以join()
+        // 调用之后的逻辑应该是关闭Jetty Server后的一些清理后置操作
+        // 如果不需要可以先不要这个join()调用
         // server.join();
     }
 
@@ -68,6 +71,7 @@ public class JettyServer {
         buildServletContextHandlerWithFilter(WebApplicationContext webApplicationContext) {
 
         ServletContextHandler handler = buildServletContextHandler(webApplicationContext);
+
         handler.addFilter(CustomFilter.class, "/*", EnumSet.of(DispatcherType.REQUEST));
 
         return handler;
