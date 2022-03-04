@@ -11,7 +11,7 @@ public class ApplicationBooter {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.register(AppConfiguration.class);
 
-        JettyServer.startJettyServerWithFilter(8080, context);
+        JettyServer.startJettyServer(8080, context);
     }
 
 }
