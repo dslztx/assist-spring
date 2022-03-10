@@ -10,6 +10,7 @@
 
     <modules>
         <module>assist-spring-web</module>
+        <module>assist-spring-ioc</module>
     </modules>
 
     <url>https://github.com/dslztx/assist_spring</url>
