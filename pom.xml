@@ -11,6 +11,7 @@
     <modules>
         <module>assist-spring-web</module>
         <module>assist-spring-ioc</module>
+        <module>assist-spring-aop</module>
     </modules>
 
     <url>https://github.com/dslztx/assist_spring</url>
