@@ -19,6 +19,14 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>me.dslztx</groupId>
+            <artifactId>assist-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>me.dslztx</groupId>
+            <artifactId>assist-log</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
