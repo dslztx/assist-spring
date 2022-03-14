@@ -1,4 +1,3 @@
 package aop;
 
-public @interface TimeCostRecord {
-}
+public @interface TimeCostRecord {}

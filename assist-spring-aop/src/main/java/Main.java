@@ -1,17 +1,19 @@
-import aop.TargetObject;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import aop.TargetObject;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ClassPathXmlApplicationContext applicationContext =
+            new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        TargetObject object = (TargetObject) applicationContext.getBean("targetObject");
+        TargetObject object = (TargetObject)applicationContext.getBean("targetObject");
         object.beforeTest();
 
         try {
             object.afterThrowingTest();
         } catch (Exception e) {
-//            e.printStackTrace();
+            // e.printStackTrace();
         }
 
         object.afterReturningTest();
@@ -19,9 +21,8 @@ public class Main {
         try {
             object.afterTest();
         } catch (Exception e) {
-//            e.printStackTrace();
+            // e.printStackTrace();
         }
-
 
         object.aroundTest();
 
