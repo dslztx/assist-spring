@@ -1,6 +1,5 @@
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.dslztx</groupId>
@@ -38,7 +37,7 @@
         <me.dslztx.mockito.version>2.20.0</me.dslztx.mockito.version>
         <me.dslztx.alibaba.fastjson.version>1.2.56</me.dslztx.alibaba.fastjson.version>
         <me.dslztx.mybatis.version>3.3.0</me.dslztx.mybatis.version>
-        <me.dslztx.spring.version>5.0.12.RELEASE</me.dslztx.spring.version>
+        <me.dslztx.spring.version>5.2.19.RELEASE</me.dslztx.spring.version>
 
         <plugin-compiler.version>3.0</plugin-compiler.version>
         <plugin-compiler.compile.encoding>UTF-8</plugin-compiler.compile.encoding>
