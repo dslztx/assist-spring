@@ -24,5 +24,7 @@ public class Main {
 
 
         object.aroundTest();
+
+        object.aroundTest2();
     }
 }

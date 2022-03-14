@@ -24,12 +24,12 @@ public class NotVeryUsefulAspect {
         System.out.println(retObj);
     }
 
-    @After("execution( * aop.TargetObject.afterTest())")
+    @After(value = "execution( * aop.TargetObject.afterTest())")
     public void afterAdvice() {
         System.out.println("test after advice");
     }
 
-    @Around("execution( * aop.TargetObject.aroundTest())")
+    @Around(value = "execution( * aop.TargetObject.*()) && @annotation(TimeCostRecord)")
     public void aroundAdvice(ProceedingJoinPoint t) throws Throwable {
         String methodName = t.getSignature().getName();
 
@@ -42,7 +42,7 @@ public class NotVeryUsefulAspect {
         } finally {
             TimerAssist.timerStop(methodName);
 
-            System.out.println(TimerAssist.timerValue(methodName));
+            System.out.println("[" + methodName + "] time cost is: " + TimerAssist.timerValue(methodName));
         }
     }
 

@@ -9,7 +9,7 @@ public class TargetObject {
         System.out.println("world");
     }
 
-    public Object afterReturningTest() {
+    public Object afterReturningTest() throws InterruptedException {
         return "has returned";
     }
 
@@ -25,11 +25,17 @@ public class TargetObject {
         }
     }
 
+    @TimeCostRecord
     public void aroundTest() throws InterruptedException {
         System.out.println("hello");
 
         Thread.sleep(10000L);
 
         System.out.println("world");
+    }
+
+    @TimeCostRecord
+    public void aroundTest2() throws InterruptedException {
+        Thread.sleep(5000L);
     }
 }
