@@ -12,6 +12,7 @@
         <module>assist-spring-web</module>
         <module>assist-spring-ioc</module>
         <module>assist-spring-aop</module>
+        <module>assist-spring-mybatis</module>
     </modules>
 
     <url>https://github.com/dslztx/assist_spring</url>
@@ -32,7 +33,7 @@
 
         <!--version-->
 
-        <me.dslztx.assist.version>3.0.18</me.dslztx.assist.version>
+        <me.dslztx.assist.version>3.0.19</me.dslztx.assist.version>
         <me.dslztx.slf4j.version>1.7.30</me.dslztx.slf4j.version>
         <me.dslztx.junit.version>4.13.1</me.dslztx.junit.version>
         <me.dslztx.mockito.version>2.20.0</me.dslztx.mockito.version>
@@ -72,6 +73,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${me.dslztx.spring.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>me.dslztx</groupId>
             <artifactId>assist-log</artifactId>
             <version>${me.dslztx.assist.version}</version>
@@ -100,6 +107,11 @@
                 <version>${me.dslztx.assist.version}</version>
             </dependency>
             <dependency>
+                <groupId>me.dslztx</groupId>
+                <artifactId>assist-client</artifactId>
+                <version>${me.dslztx.assist.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${me.dslztx.alibaba.fastjson.version}</version>
@@ -107,6 +119,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
+                <version>${me.dslztx.spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
                 <version>${me.dslztx.spring.version}</version>
             </dependency>
         </dependencies>
