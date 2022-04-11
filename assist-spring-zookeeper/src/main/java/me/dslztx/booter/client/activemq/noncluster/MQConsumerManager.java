@@ -13,6 +13,8 @@ import org.apache.activemq.command.ActiveMQQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.jms.*;
+
 public class MQConsumerManager extends MQClientManager {
 
     private static final Logger logger = LoggerFactory.getLogger(MQConsumerManager.class);
