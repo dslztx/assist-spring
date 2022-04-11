@@ -13,6 +13,7 @@
         <module>assist-spring-ioc</module>
         <module>assist-spring-aop</module>
         <module>assist-spring-mybatis</module>
+        <module>assist-spring-zookeeper</module>
     </modules>
 
     <url>https://github.com/dslztx/assist_spring</url>
