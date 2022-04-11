@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.sql.DataSource;
 
+import me.dslztx.assist.client.mysql.MapperFactory;
 import org.apache.ibatis.binding.MapperProxyFactory;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.SqlSession;
@@ -118,7 +119,7 @@ public class MapperBindingToMultiDataSourceAndRegistration implements BeanDefini
         throws BeansException {
 
         Map<String, DruidDataSource> dataSourceMap = DataSourceFactory.obtainAllDataSources();
-        Set<Class<?>> mapperClzSet = DaoFactory.scanMapperInterfaceAll();
+        Set<Class<?>> mapperClzSet = MapperFactory.scanMapperInterfaceAll();
 
         bindingAndRegistration(dataSourceMap, mapperClzSet, configurableListableBeanFactory);
     }
