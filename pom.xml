@@ -3,17 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>me.dslztx</groupId>
-    <artifactId>assist-spring-parent</artifactId>
+    <groupId>me.dslztx.spring</groupId>
+    <artifactId>parent</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>assist-spring-web</module>
-        <module>assist-spring-ioc</module>
-        <module>assist-spring-aop</module>
-        <module>assist-spring-mybatis</module>
-        <module>assist-spring-zookeeper</module>
+        <module>web</module>
+        <module>ioc</module>
+        <module>aop</module>
+        <module>mybatis</module>
+        <module>zookeeper</module>
     </modules>
 
     <url>https://github.com/dslztx/assist_spring</url>

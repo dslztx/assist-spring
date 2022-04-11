@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>me.dslztx</groupId>
-        <artifactId>assist-spring-parent</artifactId>
+        <groupId>me.dslztx.spring</groupId>
+        <artifactId>parent</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>assist-spring-ioc</artifactId>
+    <artifactId>ioc</artifactId>
     <packaging>jar</packaging>
 
     <properties>
