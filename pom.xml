@@ -29,8 +29,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!--version-->
-        <!--        以me.dslztx开头，避免变量名冲突，导致加载奇怪的依赖，比如在-->
-        <!--        "org.springframework.boot:spring-boot-dependencies"JAR包中定义了"log4j2.version"变量-->
+        <!--以me.dslztx开头，避免变量名冲突，导致加载奇怪的依赖，比如在-->
+        <!--"org.springframework.boot:spring-boot-dependencies"JAR包中定义了"log4j2.version"变量-->
 
         <!--version-->
 
