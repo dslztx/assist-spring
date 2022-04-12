@@ -1,11 +1,10 @@
-package mybatis.javaconfig;
+package me.mybatis.javaconfig;
 
 import java.util.Map;
 import java.util.Set;
 
 import javax.sql.DataSource;
 
-import me.dslztx.assist.client.mysql.MapperFactory;
 import org.apache.ibatis.binding.MapperProxyFactory;
 import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.SqlSession;
@@ -24,8 +23,10 @@ import org.springframework.context.annotation.Configuration;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
-import me.dslztx.assist.client.mysql.DaoFactory;
 import me.dslztx.assist.client.mysql.DataSourceFactory;
+import me.dslztx.assist.client.mysql.MapperFactory;
+import me.dslztx.assist.util.CollectionAssist;
+import me.dslztx.assist.util.ObjectAssist;
 
 /**
  * 目标是：实现Mapper的多数据源绑定注册<br/>
@@ -119,7 +120,17 @@ public class MapperBindingToMultiDataSourceAndRegistration implements BeanDefini
         throws BeansException {
 
         Map<String, DruidDataSource> dataSourceMap = DataSourceFactory.obtainAllDataSources();
+
+        if (ObjectAssist.isNull(dataSourceMap) || CollectionAssist.isEmpty(dataSourceMap.keySet())) {
+            logger.error("no datasource");
+            return;
+        }
+
         Set<Class<?>> mapperClzSet = MapperFactory.scanMapperInterfaceAll();
+        if (CollectionAssist.isEmpty(mapperClzSet)) {
+            logger.error("no mapper interface");
+            return;
+        }
 
         bindingAndRegistration(dataSourceMap, mapperClzSet, configurableListableBeanFactory);
     }

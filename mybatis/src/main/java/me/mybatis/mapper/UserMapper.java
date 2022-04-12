@@ -1,8 +1,7 @@
-package mybatis.mapper;
+package me.mybatis.mapper;
 
+import me.mybatis.domain.User;
 import org.apache.ibatis.annotations.Param;
-
-import mybatis.domain.User;
 
 public interface UserMapper {
 

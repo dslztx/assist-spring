@@ -1,4 +1,4 @@
-package mybatis.dao;
+package me.mybatis.dao;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -16,7 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import me.dslztx.assist.client.mysql.DataSourceFactory;
-import mybatis.domain.User;
+import me.mybatis.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContextTest.xml")

@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=mybatis.javaconfig.TestBean
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=me.mybatis.autoconfigure.MultiDataSourceMapperAutoConfiguration

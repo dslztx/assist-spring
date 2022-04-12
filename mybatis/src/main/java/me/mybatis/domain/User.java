@@ -1,4 +1,4 @@
-package mybatis.domain;
+package me.mybatis.domain;
 
 public class User {
     private Long id;
