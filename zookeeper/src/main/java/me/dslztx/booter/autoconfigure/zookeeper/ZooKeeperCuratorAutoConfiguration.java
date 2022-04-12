@@ -19,13 +19,11 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties({ZooKeeperCuratorProperties.class})
 public class ZooKeeperCuratorAutoConfiguration {
 
-  @Bean(name = "curatorFramework", initMethod = "start", destroyMethod = "close")
-  @ConditionalOnProperty(prefix = "zookeeper.curator", name = "addresses")
-  @ConditionalOnMissingBean(type = "org.apache.curator.framework.CuratorFramework")
-  public CuratorFramework defineCuratorFramework(
-      ZooKeeperCuratorProperties zooKeeperCuratorProperties) {
-    RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
-    return CuratorFrameworkFactory
-        .newClient(zooKeeperCuratorProperties.getAddresses(), retryPolicy);
-  }
+    @Bean(name = "curatorFramework", initMethod = "start", destroyMethod = "close")
+    @ConditionalOnProperty(prefix = "zookeeper.curator", name = "addresses")
+    @ConditionalOnMissingBean(type = "org.apache.curator.framework.CuratorFramework")
+    public CuratorFramework defineCuratorFramework(ZooKeeperCuratorProperties zooKeeperCuratorProperties) {
+        RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
+        return CuratorFrameworkFactory.newClient(zooKeeperCuratorProperties.getAddresses(), retryPolicy);
+    }
 }

@@ -1,9 +1,10 @@
 package me.dslztx.booter;
 
-import me.dslztx.booter.autoconfigure.zookeeper.ZooKeeperCuratorAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+
+import me.dslztx.booter.autoconfigure.zookeeper.ZooKeeperCuratorAutoConfiguration;
 
 /**
  * 增加“exclude=ZooKeeperCuratorAutoConfiguration.class”，放弃“ZooKeeperCuratorAutoConfiguration”对应的自动配置<br/>
@@ -13,19 +14,18 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @author dslztx
  */
 @SpringBootApplication(scanBasePackages = {"me.dslztx.booter.activemq", "me.dslztx.booter.client",
-    "me.dslztx.booter.javaconfig",
-    "me.dslztx.booter.property"}, exclude = ZooKeeperCuratorAutoConfiguration.class)
+    "me.dslztx.booter.javaconfig", "me.dslztx.booter.property"}, exclude = ZooKeeperCuratorAutoConfiguration.class)
 public class TestBooter {
 
-  public static void main(String[] args) {
-    ConfigurableApplicationContext context = SpringApplication.run(TestBooter.class, args);
+    public static void main(String[] args) {
+        ConfigurableApplicationContext context = SpringApplication.run(TestBooter.class, args);
 
-    String[] beanDefinitions = context.getBeanDefinitionNames();
-    System.out.println("beans as follows are registered : ");
-    if (beanDefinitions != null) {
-      for (String beanDefinition : beanDefinitions) {
-        System.out.println(beanDefinition);
-      }
+        String[] beanDefinitions = context.getBeanDefinitionNames();
+        System.out.println("beans as follows are registered : ");
+        if (beanDefinitions != null) {
+            for (String beanDefinition : beanDefinitions) {
+                System.out.println(beanDefinition);
+            }
+        }
     }
-  }
 }
