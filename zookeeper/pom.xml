@@ -10,7 +10,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>zookeeper</artifactId>
+    <artifactId>spring-boot-starter-test-zookeeper</artifactId>
     <packaging>jar</packaging>
 
     <properties>

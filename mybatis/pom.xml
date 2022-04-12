@@ -9,7 +9,7 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>mybatis</artifactId>
+    <artifactId>spring-boot-starter-multidatasource-mapper</artifactId>
     <packaging>jar</packaging>
 
     <properties>
