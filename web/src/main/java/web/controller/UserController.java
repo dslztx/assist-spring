@@ -1,5 +1,12 @@
 package web.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -55,4 +62,31 @@ public class UserController {
 
         return "timeout";
     }
+
+    @RequestMapping("/uploadChunked")
+    public String uploadChunked(HttpServletRequest request, HttpServletResponse response)
+        throws InterruptedException, IOException {
+
+        System.out.println(request.getHeader("Transfer-Encoding"));
+
+        InputStream ii = request.getInputStream();
+
+        byte[] dd = IOUtils.toByteArray(ii);
+
+        System.out.println(dd.length);
+
+        return "success";
+    }
+
+    @RequestMapping(value = {"/mail/identify"}, method = {RequestMethod.POST})
+    @ResponseBody
+    public String identify(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println(request.getHeader("Content-Length"));
+
+        byte[] bb = IOUtils.toByteArray(request.getInputStream());
+        System.out.println(bb.length);
+
+        return "success";
+    }
+
 }

@@ -5,7 +5,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.nio.charset.StandardCharsets;
+import java.util.UUID;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
@@ -22,7 +26,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +41,6 @@ import web.domain.User;
 /**
  * 先手动开启Jetty
  */
-@Ignore
 public class HttpRequestTest {
     private static final Logger logger = LoggerFactory.getLogger(HttpRequestTest.class);
 
@@ -342,6 +344,38 @@ public class HttpRequestTest {
         } catch (Exception e) {
             logger.error("", e);
             Assert.fail();
+        }
+    }
+
+    @Test
+    public void testMailIdentify() throws Exception {
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+
+        HttpPost httpPost = new HttpPost("http://localhost:8080/mail/identify");
+
+        byte[] mailData = IOUtils.toByteArray(ClassPathResourceAssist.locateInputStream("test.eml"));
+
+        // 邮件完全加载进内存了，可以让httpclient自动设置Content-Length
+        httpPost.addHeader(HttpHeaders.CONTENT_TYPE, "message/rfc822");
+        httpPost.addHeader(HttpHeaders.CONTENT_MD5, DigestUtils.md5Hex(mailData));
+        httpPost.addHeader("X-SMTP-Remote-Address", "1.2.3.4");
+        httpPost.addHeader("X-SMTP-Helo", "test.com");
+        httpPost.addHeader("X-SMTP-Sender", "a@test.com");
+        httpPost.addHeader("X-SMTP-Recipients", String.join(",", "b@example.com", "c@example.com"));
+        httpPost.addHeader("X-ANTISPAM-Message-Id", UUID.randomUUID().toString());
+        httpPost.addHeader("X-ANTISPAM-Message-Size", String.valueOf(mailData.length));
+        httpPost.addHeader("X-ANTISPAM-Message-Truncated", String.valueOf(false));
+        httpPost.addHeader("X-ANTISPAM-Product", "in");
+        httpPost.addHeader("X-ANTISPAM-Client", "127.0.0.1);");
+        httpPost.addHeader("X-ANTISPAM-Extras",
+            Base64.encodeBase64String("{\"mType\":\"NORMAL\"}".getBytes(StandardCharsets.UTF_8)));
+        // 这里没有考虑截断
+        httpPost.setEntity(new ByteArrayEntity(mailData));
+
+        try (CloseableHttpResponse httpResponse = httpClient.execute(httpPost)) {
+            String content = EntityUtils.toString(httpResponse.getEntity());
+
+            System.out.println(content);
         }
     }
 
