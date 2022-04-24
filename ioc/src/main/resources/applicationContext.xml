@@ -15,6 +15,7 @@
         <property name="aaBean" ref="aaBean"/>
         <property name="aKey" value="${aKey}"/>
         <property name="age" value="33"/>
+        <property name="ifDeleted" value="true"/>
         <property name="intList">
             <list>
                 <value>1</value>

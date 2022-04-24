@@ -28,6 +28,8 @@ public class A {
 
     private Map<String, String> strStrMap;
 
+    private boolean ifDeleted;
+
     public AA getAaBean() {
         return aaBean;
     }
@@ -106,5 +108,13 @@ public class A {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public boolean isIfDeleted() {
+        return ifDeleted;
+    }
+
+    public void setIfDeleted(boolean ifDeleted) {
+        this.ifDeleted = ifDeleted;
     }
 }

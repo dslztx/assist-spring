@@ -40,6 +40,8 @@ public class IOCTest {
 
             Assert.assertTrue(a.getStrIntMap().keySet().size() == 3);
             Assert.assertTrue(a.getStrStrMap().keySet().size() == 3);
+
+            Assert.assertTrue(a.isIfDeleted() == true);
         } catch (Exception e) {
             log.error("", e);
             Assert.fail();
