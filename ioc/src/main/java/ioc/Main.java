@@ -1,7 +1,8 @@
 package ioc;
 
-import me.dslztx.assist.util.StringAssist;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import me.dslztx.assist.util.StringAssist;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,7 +11,7 @@ public class Main {
 
         System.out.println(StringAssist.joinUseSeparator(context.getBeanDefinitionNames(), '\n'));
 
-//        context.registerShutdownHook();
-//        context.close();
+        // context.registerShutdownHook();
+        // context.close();
     }
 }
