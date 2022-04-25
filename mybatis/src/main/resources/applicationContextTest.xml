@@ -37,6 +37,6 @@ http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-sprin
         </property>
     </bean>
 
-    <mybatis:scan base-package="mybatis" factory-ref="sqlSessionFactory"/>
+    <mybatis:scan base-package="me.mybatis" factory-ref="sqlSessionFactory"/>
 
 </beans>
