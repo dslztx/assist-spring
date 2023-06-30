@@ -23,25 +23,51 @@ public class HealthController {
 
     private static volatile ServiceStatus serviceStatus = null;
 
-    public static void serviceStart() {
+    @RequestMapping(value = "/health/start", method = RequestMethod.GET)
+    @ResponseBody
+    public static String serviceStart() {
+        logger.info("change the status to [START]");
+
         serviceStatus = ServiceStatus.START;
+
+        return serviceStatus.toString();
     }
 
-    public static void serviceStop() {
+    @RequestMapping(value = "/health/stop", method = RequestMethod.GET)
+    @ResponseBody
+    public static String serviceStop() {
+        logger.info("change the status to [STOP]");
+
         serviceStatus = ServiceStatus.STOP;
+
+        return serviceStatus.toString();
     }
 
-    public static void serviceOnline() {
+    @RequestMapping(value = "/health/online", method = RequestMethod.GET)
+    @ResponseBody
+    public static String serviceOnline() {
+        logger.info("change the status to [ONLINE]");
+
         serviceStatus = ServiceStatus.ONLINE;
+
+        return serviceStatus.toString();
     }
 
-    public static void serviceOffline() {
+    @RequestMapping(value = "/health/offline", method = RequestMethod.GET)
+    @ResponseBody
+    public static String serviceOffline() {
+        logger.info("change the status to [OFFLINE]");
+
         serviceStatus = ServiceStatus.OFFLINE;
+
+        return serviceStatus.toString();
     }
 
     @RequestMapping(value = "/health/status", method = RequestMethod.GET)
     @ResponseBody
     public String status(HttpServletRequest request, HttpServletResponse response) {
+        logger.info("get the status...");
+
         if (serviceStatus == ServiceStatus.ONLINE) {
             response.setStatus(HttpServletResponse.SC_OK);
             return ServiceStatus.ONLINE.toString();
