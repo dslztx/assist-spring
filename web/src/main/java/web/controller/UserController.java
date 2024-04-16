@@ -64,7 +64,7 @@ public class UserController {
     }
 
     @RequestMapping("/uploadChunked")
-    public String uploadChunked(HttpServletRequest request, HttpServletResponse response)
+    public void uploadChunked(HttpServletRequest request, HttpServletResponse response)
         throws InterruptedException, IOException {
 
         System.out.println(request.getHeader("Transfer-Encoding"));
@@ -75,7 +75,8 @@ public class UserController {
 
         System.out.println(dd.length);
 
-        return "success";
+        response.setStatus(200);
+        response.getWriter().println("success");
     }
 
     @RequestMapping(value = {"/mail/identify"}, method = {RequestMethod.POST})
